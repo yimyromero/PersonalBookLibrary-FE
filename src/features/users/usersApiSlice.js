@@ -32,7 +32,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-    userGetUsersQuery,
+    useGetUsersQuery,
 } = usersApiSlice;
 
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select();
