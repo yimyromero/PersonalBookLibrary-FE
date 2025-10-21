@@ -7,6 +7,7 @@ import Welcome from './features/auth/Welcome';
 import User from './features/users/User';
 import UsersList from './features/users/UsersList';
 import BooksList from './features/books/BooksList';
+import BorrowList from './features/borrow/BorrowList';
 //import './App.css'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route index element={<Welcome />} />
         <Route path='users' element={<UsersList />} />
         <Route path='books' element={<BooksList />} />
+        <Route path='borrows' element={<BorrowList />} />
       </Route>
     </Route>
    </Routes>

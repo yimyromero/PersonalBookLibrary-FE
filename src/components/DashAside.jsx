@@ -32,7 +32,7 @@ const DashAside = () => {
                         </Link>
                     </li>
                     <li className="hover:font-bold hover:bg-red-100 rounded">
-                        <Link to='/borrowed' className="flex items-center gap-2 p-2">
+                        <Link to='/dash/borrows' className="flex items-center gap-2 p-2">
                         <BookmarkSquareIcon className="size-5"/>
                         Borrowed
                         </Link>
