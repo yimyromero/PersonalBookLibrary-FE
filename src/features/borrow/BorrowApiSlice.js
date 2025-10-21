@@ -27,12 +27,47 @@ export const borrowsApiSlice = apiSlice.injectEndpoints({
                     ]
                 } else return [{ type: 'Borrow', id: 'LIST' }]
             }
+        }),
+        addNewBorrow: builder.mutation({
+            query: initialBorrowData => ({
+                url: '/borrows',
+                method: 'POST',
+                body: {
+                    ...initialBorrowData
+                }
+            }),
+            invalidatesTags: [{ type: 'Borrow', id: 'LIST'}]
+        }),
+        updateBorrow: builder.mutation({
+            query: initialBorrowData => ({
+                url: '/borrows',
+                method: 'PATCH',
+                body: {
+                    ...initialBorrowData
+                }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Borrow', id: arg.id }
+            ]
+        }),
+        deleteBorrow: builder.mutation({
+            query: ({ id }) => ({
+                url: '/borrows',
+                method: 'DELETE',
+                body: { id }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Borrow', id: arg.id }
+            ]
         })
     })
 });
 
 export const {
     useGetBorrowsQuery,
+    useAddNewBorrowMutation,
+    useUpdateBorrowMutation,
+    useDeleteBorrowMutation
 } = borrowsApiSlice;
 
 export const selectBorrowsResult = borrowsApiSlice.endpoints.getBorrows.select();

@@ -27,12 +27,47 @@ export const booksApiSlice = apiSlice.injectEndpoints({
                     ]
                 } else return [{ type: 'Book', id: 'LIST' }]
             }
+        }),
+        addNewBook: builder.mutation({
+            query: initialBookData => ({
+                url: '/books',
+                method: 'POST',
+                body: {
+                    ...initialBookData
+                }
+            }),
+            invalidatesTags: [{ type: 'Book', id: 'LIST'}]
+        }),
+        updateBook: builder.mutation({
+            query: initialBookData => ({
+                url: '/books',
+                method: 'PATCH',
+                body: {
+                    ...initialBookData
+                }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Book', id: arg.id }
+            ]
+        }),
+        deleteBook: builder.mutation({
+            query: ({ id }) => ({
+                url: '/books',
+                method: 'DELETE',
+                body: { id }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Book', id: arg.id }
+            ]
         })
     })
 });
 
 export const {
     useGetBooksQuery,
+    useAddNewBookMutation,
+    useUpdateBookMutation,
+    useDeleteBookMutation
 } = booksApiSlice;
 
 export const selectBooksResult = booksApiSlice.endpoints.getBooks.select();
