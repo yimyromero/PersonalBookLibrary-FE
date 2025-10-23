@@ -5,7 +5,7 @@ import { Link } from "react-router";
 const DashAside = () => {
     const content = (
         <aside className="flex flex-col row-span-2 col-span-2 px-4 py-8 border border-r-1 border-gray-200 h-screen bg-white">
-            <div className="flex items-center gap-1 mb-8 px-2">
+            <div className="flex flex-wrap items-center gap-1 mb-8 px-2">
                 <HomeIconSolid  className="size-8 text-red-400"/>
                 <span className="font-bold text-2xl">Library</span>                
             </div>

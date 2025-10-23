@@ -8,7 +8,7 @@ const DashLayout = () => {
         <div className='min-h-screen grid grid-cols-12 grid-rows-[70px_1fr] bg-slate-200'>
             <DashAside />
             <DashHeader/>
-            <div className='col-start-3 row-start-2 col-span-10 m-5 bg-white rounded'>
+            <div className='col-start-3 row-start-2 col-span-10 m-5 rounded'>
                 <Outlet />
             </div>
             {/* <DashFooter /> */}

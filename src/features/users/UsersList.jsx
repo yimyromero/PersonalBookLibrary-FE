@@ -1,5 +1,7 @@
 import { useGetUsersQuery } from "./usersApiSlice";
 import User from "./User";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router";
 
 const UsersList = () => {
 
@@ -30,7 +32,11 @@ const UsersList = () => {
             : null;
 
         content = (
-            <table className="border-collapse table-auto w-full">
+            <>
+            <div className="flex justify-end mb-3">
+                <Link className="flex gap-2 items-center text-white py-2 px-4 bg-red-400 hover:bg-red-500 rounded-full" to="/dash/users/new">Add User<PlusIcon className="size-5 font-bold"/></Link>
+            </div>
+            <table className="border-collapse table-auto w-full bg-white">
                 <thead>
                     <tr className="bg-slate-100">
                         <th className="text-xs text-left text-neutral-600 p-4 border-b border-gray-200 font-normal">USERNAME</th>
@@ -42,6 +48,7 @@ const UsersList = () => {
                     {tableContent}
                 </tbody>
             </table>
+            </>
         );
     }
 
