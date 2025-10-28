@@ -11,7 +11,6 @@ export const booksApiSlice = apiSlice.injectEndpoints({
             validateStatus: (response, result) => {
                 return response.status === 200 && !result.isError;
             },
-            keepUnusedDataFor: 5,
             transformResponse: responseData => {
                 const loadedBooks = responseData.map(book => {
                     book.id = book._id;

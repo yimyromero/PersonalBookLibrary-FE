@@ -11,7 +11,11 @@ const UsersList = () => {
         isSuccess,
         isError,
         error
-    } = useGetUsersQuery();
+    } = useGetUsersQuery(null, {
+        pollingInterval: 60000,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    });
     console.log("users", users);
 
     let content;
@@ -34,7 +38,7 @@ const UsersList = () => {
         content = (
             <>
             <div className="flex justify-end mb-3">
-                <Link className="flex gap-2 items-center text-white py-2 px-4 bg-red-400 hover:bg-red-500 rounded-full" to="/dash/users/new">Add User<PlusIcon className="size-5 font-bold"/></Link>
+                <Link className="flex gap-2 items-center text-white py-2 px-4 bg-rose-400 hover:bg-rose-500 rounded-full" to="/dash/users/new">Add User<PlusIcon className="size-5 font-bold"/></Link>
             </div>
             <table className="border-collapse table-auto w-full bg-white">
                 <thead>
