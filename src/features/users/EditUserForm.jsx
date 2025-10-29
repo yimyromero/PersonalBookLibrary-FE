@@ -3,6 +3,7 @@ import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router";
 import { ROLES } from "../../config/roles";
 import { DocumentPlusIcon, DocumentMinusIcon } from "@heroicons/react/24/solid";
+import ConfirmDeleteModal from "../../components/modals/ConfirmDeleteModal";
 
 const USER_REG = /^[a-zA-Z]{3,20}$/;
 const PWD_REGEX = /^[a-zA-Z0-9!@#$%]{4,12}$/;
@@ -30,8 +31,7 @@ const EditUserForm = ({ user }) => {
     const [validPassword, setValidPassword] = useState(false);
     const [roles, setRoles] = useState(user.roles);
     const [active, setActive] = useState(user.active);
-
-    console.log("active", active);
+    const [isOpen, setOpen] = useState(false);
 
     useEffect(() => {
         setValidUsername(USER_REG.test(username));
@@ -84,7 +84,12 @@ const EditUserForm = ({ user }) => {
     }
 
     const onDeleteUserClicked = async () => {
-        await deleteUser({ id: user.id });
+        try {
+            await deleteUser({ id: user.id });
+            setOpen(false);
+        } catch (err) {
+            console.error("Couldn't delete user", err);
+        }
     }
     let canSave = false;
     if (password) {
@@ -111,7 +116,6 @@ const EditUserForm = ({ user }) => {
                     id="username"
                     autoComplete="off"
                     value={username}
-                    requirose
                     onChange={onUserNameChanged}
                 />
 
@@ -165,10 +169,18 @@ const EditUserForm = ({ user }) => {
                         className="flex gap-2 items-center text-rose-700 py-2 px-4 bg-rose-100 hover:bg-rose-200 disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer rounded-full" 
                         title="Delete" 
                         disabled={!canSave}
-                        onClick={onDeleteUserClicked}
+                        onClick={() => setOpen(true)}
                         >
                         Delete <DocumentMinusIcon className="size-5" />
                     </button>
+                    <ConfirmDeleteModal 
+                        title={"Delete User?"} 
+                        message={"Are you sure? This can be undone."}
+                        isOpen={isOpen}
+                        onConfirm={onDeleteUserClicked}
+                        onCancel={() => setOpen(false)}
+                        loading={isLoading}
+                    />
                     </div>
             </form>
         </>
