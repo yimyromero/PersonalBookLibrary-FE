@@ -12,6 +12,7 @@ import EditUser from './features/users/EditUser';
 import NewUser from './features/users/NewUser';
 import Prefetch from './features/auth/Prefetch';
 import NewBook from './features/books/NewBook';
+import EditBook from './features/books/EditBook';
 //import './App.css'
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
           </Route>
           <Route path='books'>
             <Route index element={<BooksList />} />
-            {/* <Route path=':id' element={<EditBook />} /> */}
+            <Route path=':id' element={<EditBook />} />
             <Route path='new' element={<NewBook />} />
           </Route>
           <Route path='borrows' element={<BorrowList />} />

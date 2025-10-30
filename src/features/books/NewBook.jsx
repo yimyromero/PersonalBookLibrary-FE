@@ -41,7 +41,7 @@ const NewBook = () => {
         }
     }, [isSuccess, navigate]);
 
-    const canSave = [title, author, isbn, publishedYear, copiesAvailable].every(value =>  !!value);
+    const canSave = [title, author, isbn, publishedYear, copiesAvailable].every(value =>  !!value) && !isLoading;
     
     const onSaveBookClicked = async (e) => {
         e.preventDefault();
