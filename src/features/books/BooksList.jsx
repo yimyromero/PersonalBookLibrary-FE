@@ -11,7 +11,13 @@ const BooksList = () => {
         isSuccess,
         isError,
         error
-    } = useGetBooksQuery();
+    } = useGetBooksQuery(
+        null, {
+        pollingInterval: 60000,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    });
+
     console.log("books", books);
 
     let content;
