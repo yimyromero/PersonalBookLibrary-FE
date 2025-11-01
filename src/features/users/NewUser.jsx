@@ -86,11 +86,11 @@ const NewUser = () => {
                 <div className="flex mb-7">
                     <h2 className="text-xl font-bold text-slate-800">New User</h2>
                 </div>
-                <label className="pb-1 after:content-['*'] after:text-red-500" htmlFor="username">
-                    Username: <span>[3-20 letters]</span>
+                <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="username">
+                    Username: <span className="font-normal text-xs text-gray-500">(3-20 letters)</span>
                 </label>
                 <input 
-                    className="rounded border border-gray-300 bg-gray-100 mb-3 px-2 py-1 focus:outline-none"
+                    className="rounded border border-gray-300 bg-gray-100 mb-4 px-2 py-1 focus:outline-none"
                     type="text"
                     id="username"
                     autoComplete="off"
@@ -99,11 +99,11 @@ const NewUser = () => {
                     onChange={onUserNameChanged}
                 />
 
-                <label className="pb-1 after:content-['*'] after:text-red-500" htmlFor="password">
-                    Password: <span>[4-12 chars incl. !@#$%]</span>
+                <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="password">
+                    Password: <span className="font-normal text-xs text-gray-500">(4-12 chars incl. !@#$%)</span>
                 </label>
                 <input 
-                    className="rounded border border-gray-300 bg-gray-100 mb-3 px-2 py-1 focus:outline-none"
+                    className="rounded border border-gray-300 bg-gray-100 mb-4 px-2 py-1 focus:outline-none"
                     type="password"
                     autoComplete="off" 
                     id="password"
@@ -113,11 +113,12 @@ const NewUser = () => {
                     onChange={onPasswordChanged}
                 />
 
-                <label className="pb-1 after:content-['*'] after:text-red-500" htmlFor="roles">
+                <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="roles">
                     Assigned roles:
                 </label>
+                <div className="w-40">
                 <select
-                    className="border border-gray-300 p-2 rounded bg-gray-100 focus:outline-none"
+                    className="border border-gray-300 p-2 rounded bg-gray-100 focus:outline-none w-full"
                     id="roles"
                     name="roles"
                     multiple={true}
@@ -125,7 +126,7 @@ const NewUser = () => {
                     value={roles}
                     onChange={onRolesChanged}
                 >{options}</select>
-
+                </div>
                 <div className="mt-8"><button className="flex gap-2 items-center text-white py-2 px-4 bg-red-400 hover:bg-red-500 disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer rounded-full" title="Save" disabled={!canSave}>
                         Save <DocumentPlusIcon className="size-5" /></button>
                     </div>

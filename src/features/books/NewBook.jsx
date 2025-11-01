@@ -59,11 +59,11 @@ const NewBook = () => {
                 <div className="flex mb-7">
                     <h2 className="text-xl font-bold text-slate-800">New Book</h2>
                 </div>
-                <label className="pb-1 after:content-['*'] after:text-red-500" htmlFor="title">
+                <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="title">
                     Title:
                 </label>
                 <input 
-                    className="rounded border border-gray-300 bg-gray-100 mb-3 px-2 py-1 focus:outline-none"
+                    className="rounded border border-gray-300 bg-gray-100 mb-4 px-2 py-1 focus:outline-none"
                     type="text"
                     id="title"
                     autoComplete="off"
@@ -71,11 +71,11 @@ const NewBook = () => {
                     required
                     onChange={onTitleChanged}
                 />
-                 <label className="pb-1 after:content-['*'] after:text-red-500" htmlFor="author">
+                 <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="author">
                     Author:
                 </label>
                 <input 
-                    className="rounded border border-gray-300 bg-gray-100 mb-3 px-2 py-1 focus:outline-none"
+                    className="rounded border border-gray-300 bg-gray-100 mb-4 px-2 py-1 focus:outline-none"
                     type="text"
                     id="author"
                     autoComplete="off"
@@ -83,33 +83,33 @@ const NewBook = () => {
                     required
                     onChange={onAuthorChanged}
                 />
-                 <label className="pb-1 after:content-['*'] after:text-red-500" htmlFor="isbn">
+                 <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="isbn">
                     ISBN:
                 </label>
                 <input 
-                    className="rounded border border-gray-300 bg-gray-100 mb-3 px-2 py-1 focus:outline-none"
+                    className="rounded border border-gray-300 bg-gray-100 mb-4 px-2 py-1 focus:outline-none"
                     type="text"
                     id="isbn"
                     autoComplete="off"
                     value={isbn}
                     onChange={onISBNChanged}
                 />
-                 <label className="pb-1" htmlFor="genre">
+                 <label className="text-gray-600 text-sm font-bold pb-1" htmlFor="genre">
                     Genre:
                 </label>
                 <input 
-                    className="rounded border border-gray-300 bg-gray-100 mb-3 px-2 py-1 focus:outline-none"
+                    className="rounded border border-gray-300 bg-gray-100 mb-4 px-2 py-1 focus:outline-none"
                     type="text"
                     id="genre"
                     autoComplete="off"
                     value={genre}
                     onChange={onGenreChanged}
                 />
-                 <label className="pb-1 after:content-['*'] after:text-red-500" htmlFor="pub-year">
+                 <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="pub-year">
                     Year:
                 </label>
                 <input 
-                    className="rounded border border-gray-300 bg-gray-100 mb-3 px-2 py-1 focus:outline-none"
+                    className="rounded border border-gray-300 bg-gray-100 mb-4 px-2 py-1 focus:outline-none"
                     type="text"
                     id="pub-year"
                     autoComplete="off"
@@ -117,11 +117,11 @@ const NewBook = () => {
                     required
                     onChange={onPublishedYearChanged}
                 />
-                 <label className="pb-1 after:content-['*'] after:text-red-500" htmlFor="copies-available">
+                 <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="copies-available">
                     Copies:
                 </label>
                 <input 
-                    className="rounded border border-gray-300 bg-gray-100 mb-3 px-2 py-1 focus:outline-none appearance-none appearance-text"
+                    className="rounded border border-gray-300 bg-gray-100 mb-4 px-2 py-1 focus:outline-none appearance-none appearance-text"
                     type="number"
                     id="copies-available"
                     autoComplete="off"
