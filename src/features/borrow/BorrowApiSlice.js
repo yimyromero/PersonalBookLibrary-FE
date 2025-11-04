@@ -29,7 +29,7 @@ export const borrowsApiSlice = apiSlice.injectEndpoints({
         }),
         addNewBorrow: builder.mutation({
             query: initialBorrowData => ({
-                url: '/borrows',
+                url: '/borrow',
                 method: 'POST',
                 body: {
                     ...initialBorrowData
@@ -39,7 +39,7 @@ export const borrowsApiSlice = apiSlice.injectEndpoints({
         }),
         updateBorrow: builder.mutation({
             query: initialBorrowData => ({
-                url: '/borrows',
+                url: '/borrow',
                 method: 'PATCH',
                 body: {
                     ...initialBorrowData
@@ -51,7 +51,7 @@ export const borrowsApiSlice = apiSlice.injectEndpoints({
         }),
         deleteBorrow: builder.mutation({
             query: ({ id }) => ({
-                url: '/borrows',
+                url: '/borrow',
                 method: 'DELETE',
                 body: { id }
             }),

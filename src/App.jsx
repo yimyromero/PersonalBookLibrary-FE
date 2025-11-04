@@ -38,7 +38,7 @@ function App() {
           </Route>
           <Route path='borrows'>
             <Route index element={<BorrowList/>}/>
-            <Route path=':id' element={<span>HI</span>} />
+            
             <Route path='new' element={<NewBorrow />}/>
           </Route>
         </Route> { /* End Dash */}
