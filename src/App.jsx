@@ -14,6 +14,7 @@ import Prefetch from './features/auth/Prefetch';
 import NewBook from './features/books/NewBook';
 import EditBook from './features/books/EditBook';
 import NewBorrow from './features/borrow/NewBorrow';
+import EditBorrow from './features/borrow/EditBorrow';
 //import './App.css'
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
           </Route>
           <Route path='borrows'>
             <Route index element={<BorrowList/>}/>
-            
+            <Route path=':id' element={<EditBorrow />} />
             <Route path='new' element={<NewBorrow />}/>
           </Route>
         </Route> { /* End Dash */}
