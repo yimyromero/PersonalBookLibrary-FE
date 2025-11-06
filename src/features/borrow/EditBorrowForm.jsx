@@ -7,6 +7,7 @@ import { selectAllUsers } from "../users/usersApiSlice";
 import { selectAllBooks, useGetBooksQuery } from "../books/booksApiSlice";
 import { useUpdateBorrowMutation, useDeleteBorrowMutation } from "./BorrowApiSlice";
 import { useAddNewBorrowMutation } from "./BorrowApiSlice";
+import { normalizeDateOnly, formatForInput, formatShortDate } from "../../utils/dateUtils";
 import { LOAN_STATUSES } from "../../config/loanStatuses";
 
 const EditBorrowForm = ({ borrow }) => {
@@ -25,7 +26,6 @@ const EditBorrowForm = ({ borrow }) => {
 
     const navigate = useNavigate();
 
-    const currentDate = new Date();
     const due = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
     
     const [selectedUserId, setSelectedUserId] = useState(borrow.user._id);
@@ -35,7 +35,10 @@ const EditBorrowForm = ({ borrow }) => {
 
     const onUserSelected = (e) => setSelectedUserId(e.target.value);
     const onBookSelected = (e) => setSelectedBookId(e.target.value);
-    const onDueDateChanged = (e) => setDueDate(e.target.value);
+    const onDueDateChanged = (e) => {
+        const datePicked = new Date(e.target.value);
+        setDueDate(normalizeDateOnly(datePicked));
+    } 
     const onStatusSelected = (e) => setStatus(e.target.value);
 
     useEffect(() => {
@@ -82,23 +85,23 @@ const EditBorrowForm = ({ borrow }) => {
     
     const borrowedDate = new Date().toLocaleDateString();
     const canSave = [selectedUserId, selectedBookId, dueDate, status ].every(Boolean) && !isLoading;
-    console.log("bor.id", borrow.id, "bor._id", borrow._id);
+    
      const onSaveBorrowClicked = async (e) => {
         e.preventDefault();
 
         if (canSave) {
-            await updateBorrow({ id:borrow._id, user:selectedUserId, book:selectedBookId, dueDate, status  });
+            await updateBorrow({ id:borrow.id, user:selectedUserId, book:selectedBookId, dueDate, status  });
         }
     }
 
     const content = (
         <>
-        <div className="absolute bg-yellow-100"><p class="text-red-500 ">{error?.data?.message}</p></div>
+        <div className="absolute bg-yellow-100"><p className="text-red-500 ">{error?.data?.message}</p></div>
             <form className="flex flex-col p-10 bg-white" onSubmit={onSaveBorrowClicked}>
                     <div className="flex mb-7">
                         <h2 className="text-xl font-bold text-slate-800">Edit or Return Loan</h2>
                     </div>
-                    <div className="mb-3"><span className="text-gray-600 text-sm font-bold">Date: </span><span>{new Date().toLocaleDateString()}</span></div>
+                    <div className="mb-3"><span className="text-gray-600 text-sm font-bold">Borrowed on: </span><span className="text-gray-600 text-sm">{formatShortDate(borrow.borrowDate)}</span></div>
                     <label className="font-bold text-sm pb-1 after:content-['*'] after:text-red-500 text-gray-600" htmlFor="book-title">
                         Book Title:
                     </label>
@@ -138,14 +141,16 @@ const EditBorrowForm = ({ borrow }) => {
                         type="date"
                         id="due-date"
                         autoComplete="off"
-                        value={new Date(dueDate).toISOString().split('T')[0]}
+                        value={formatForInput(dueDate)}
                         required
                         onChange={onDueDateChanged}
                     />
                     </div>
+                    
                     <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="status">
                         Status:
                     </label>
+                    <div>
                     <select className="rounded border border-gray-300 bg-gray-100 mb-3 px-2 py-1 focus:outline-none"
                         id="status"
                         name="status"
@@ -155,6 +160,7 @@ const EditBorrowForm = ({ borrow }) => {
                     >
                         {statusListOptions}
                     </select>
+                    </div>
                     <div className="mt-8"><button className="flex gap-2 items-center text-white py-2 px-4 bg-red-400 hover:bg-red-500 disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer rounded-full" title="Save" disabled={!canSave}>
                             Save <DocumentPlusIcon className="size-5" /></button>
                         </div>

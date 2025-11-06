@@ -67,7 +67,7 @@ const EditBookForm = ({ book }) => {
     
     const content = (
         <>
-            <div className="absolute bg-yellow-100"><p class="text-red-500 ">{errContent}</p></div>
+            <div className="absolute bg-yellow-100"><p className="text-red-500 ">{errContent}</p></div>
             <form className="flex flex-col p-10 bg-white" onSubmit={e => e.preventDefault()}>
                 <div className="flex mb-7">
                     <h2 className="text-xl font-bold text-slate-800">{book.title}</h2>
