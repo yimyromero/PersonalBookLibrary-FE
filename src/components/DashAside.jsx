@@ -38,13 +38,6 @@ const DashAside = () => {
                         </Link>
                     </li>
                     
-                    <li className="hover:font-bold hover:bg-red-100 rounded">
-                        <Link to='/overdue' className="flex items-center gap-2 p-2">
-                        <CalendarDateRangeIcon className="size-5"/>
-                        Overdue
-                        </Link>
-                    </li>
-                    
                 </ul>
             </nav>
         </aside>
