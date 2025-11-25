@@ -11,7 +11,11 @@ const BorrowsList = () => {
         isSuccess,
         isError,
         error
-    } = useGetBorrowsQuery();
+    } = useGetBorrowsQuery("borrowList", {
+        pollingInterval: 60000,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    });
     console.log("borrows", borrows);
 
     let content;

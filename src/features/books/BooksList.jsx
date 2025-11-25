@@ -12,7 +12,7 @@ const BooksList = () => {
         isError,
         error
     } = useGetBooksQuery(
-        null, {
+        "bookList", {
         pollingInterval: 60000,
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
