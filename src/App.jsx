@@ -15,6 +15,7 @@ import NewBook from './features/books/NewBook';
 import EditBook from './features/books/EditBook';
 import NewBorrow from './features/borrow/NewBorrow';
 import EditBorrow from './features/borrow/EditBorrow';
+import RequireAuth from './features/auth/requireAuth';
 //import './App.css'
 
 function App() {
@@ -25,24 +26,26 @@ function App() {
       <Route index element={<Public />} />
       <Route path='login' element={<Login />} />
       <Route element={<Prefetch />}>
-        <Route path='dash' element={<DashLayout />}>
-          <Route index element={<Welcome />} />
-          <Route path='users'>
-            <Route index element={<UsersList />} />
-            <Route path=':id' element={<EditUser />} />
-            <Route path='new' element={<NewUser />} />
-          </Route>
-          <Route path='books'>
-            <Route index element={<BooksList />} />
-            <Route path=':id' element={<EditBook />} />
-            <Route path='new' element={<NewBook />} />
-          </Route>
-          <Route path='borrows'>
-            <Route index element={<BorrowList/>}/>
-            <Route path=':id' element={<EditBorrow />} />
-            <Route path='new' element={<NewBorrow />}/>
-          </Route>
-        </Route> { /* End Dash */}
+        <Route element={<RequireAuth />}>
+          <Route path='dash' element={<DashLayout />}>
+            <Route index element={<Welcome />} />
+            <Route path='users'>
+              <Route index element={<UsersList />} />
+              <Route path=':id' element={<EditUser />} />
+              <Route path='new' element={<NewUser />} />
+            </Route>
+            <Route path='books'>
+              <Route index element={<BooksList />} />
+              <Route path=':id' element={<EditBook />} />
+              <Route path='new' element={<NewBook />} />
+            </Route>
+            <Route path='borrows'>
+              <Route index element={<BorrowList/>}/>
+              <Route path=':id' element={<EditBorrow />} />
+              <Route path='new' element={<NewBorrow />}/>
+            </Route>
+          </Route> { /* End Dash */}
+        </Route>
       </Route>
     </Route>
    </Routes>
