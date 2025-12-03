@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setCredentials } from './authSlice';
 import { useLoginMutation } from './authApiSlice';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
+import usePersist from '../../hooks/usePersist';
 
 const Login = () => {
     const userRef = useRef();
@@ -11,6 +12,7 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [persist, setPersist] = usePersist();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -29,7 +31,8 @@ const Login = () => {
     if (isLoading) return <p>Loading...</p>
 
     const handleUserInput = (e) => setUsername(e.target.value);
-    const handlePwdInput = (e) => setPassword(e.target.value)
+    const handlePwdInput = (e) => setPassword(e.target.value);
+    const handleToggle = () => setPersist(prev => !prev);
 
     const handleSubmit =  async (e) => {
         e.preventDefault();
@@ -93,6 +96,16 @@ const Login = () => {
                                 Sign In
                         </button>
                     </div>
+                     <label htmlFor="persist" className="text-sm mt-4">
+                        <input
+                            type="checkbox"
+                            className="text-red-500 mr-1 border-3 border-red-600 bg-red-500"
+                            id="persist"
+                            onChange={handleToggle}
+                            checked={persist}
+                        />
+                        Trust this device
+                    </label>
                     <div className="pt-7">
                         <p className="text-center text-gray-600">Don't have an account?</p>
                     </div>
