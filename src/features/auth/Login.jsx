@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { useNavigate, Link  } from 'react-router';
+import { useNavigate, Link, useLocation  } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from './authSlice';
 import { useLoginMutation } from './authApiSlice';
@@ -14,6 +14,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const [login, { isLoading }] = useLoginMutation();
 
@@ -37,7 +38,10 @@ const Login = () => {
             dispatch(setCredentials({ accessToken }));
             setUsername('');
             setPassword('');
-            navigate('/dash');
+
+            const redirectTo = location.state?.from?.pathname || '/dash';
+            navigate(redirectTo);
+            
         } catch (err) {
             if (!err.status) {
                 setErrMsg('No Server Response');
