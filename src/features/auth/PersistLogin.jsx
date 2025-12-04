@@ -9,8 +9,6 @@ const PersistLogin = () => {
     const [persist] = usePersist();
     const token = useSelector(selectCurrentToken);
 
-    const [trueSuccess, setTrueSuccess] = useState(false);
-
     const [refresh, {
         isUninitialized,
         isLoading,
@@ -19,46 +17,28 @@ const PersistLogin = () => {
         error
     }] = useRefreshMutation();
 
+    const [refreshFinished, setRefreshFinished] = useState(false);
+
     useEffect(() => {
         const verifyRefreshToken = async () => {
             if (!token && persist) {
                 try {
                     await refresh();
-                    setTrueSuccess(true);
                 } catch (err) {
-                    console.log(err);
+                    console.error("Refresh failed");
                 }
             }
+            setRefreshFinished(true);
         };
+
         verifyRefreshToken();
-    }, [token, persist, refresh])
+    }, [token, persist, refresh]);
 
-    let content = "";
+    if (!persist) return <Outlet />;
 
-    if (!persist) {
-        console.log("no persist");
-        content = <Outlet />;
-    } else if (isLoading) {
-        console.log("Loading");
-        content = <p>Loading...</p>
-    } else if (isError) {
-        console.log("error");
-        content = (
-            <p className="text-red-500">
-                {error.data?.message};
-                <Link to="/login">Please login again</Link>
-            </p>
-        )
-    } else if (isSuccess && trueSuccess) {
-        console.log("success");
-        content = <Outlet />;
-    } else if (token && isUninitialized) {
-        console.log("token and uninit");
-        console.log(isUninitialized);
-        content = <Outlet />
-    }
+    if (!refreshFinished || isLoading) return <p>Loading...</p>;
 
-    return content;
+    return <Outlet />;
 };
 
 export default PersistLogin;
