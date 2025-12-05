@@ -28,8 +28,6 @@ const Login = () => {
         setErrMsg('');
     }, [username, password])
 
-    if (isLoading) return <p>Loading...</p>
-
     const handleUserInput = (e) => setUsername(e.target.value);
     const handlePwdInput = (e) => setPassword(e.target.value);
     const handleToggle = () => setPersist(prev => !prev);
@@ -51,7 +49,7 @@ const Login = () => {
             } else if (err.status === 400) {
                 setErrMsg('Missing Username or Password');
             } else if (err.status === 401) {
-                setErrMsg('Unauthorized');
+                setErrMsg('Username or password is incorrect');
             } else {
                 setErrMsg(err.data?.message);
             }
@@ -62,11 +60,12 @@ const Login = () => {
     
     const content = (
         <section className="flex justify-center items-center flex-col h-screen overflow-scroll py-10">
+            <div className={`bg-red-50 py-3 px-4 rounded mb-7 ${errMsg ? 'block' : 'hidden'}`}>
+                    <p ref={errRef} className="text-red-500" aria-live="assertive">{errMsg}</p>
+            </div>
             <header><h1 className="text-2xl text-center font-bold text-slate-800">Sign in</h1></header>
             <main className="flex items-center justify-center flex-col w-full max-w-md mx-auto">
-                <div className="absolute bg-yellow-100">
-                    <p ref={errRef} className="text-red-500" aria-live="assertive">{errMsg}</p>
-                </div>
+                
                 <form className="flex flex-col px-3 pt-7 bg-white w-full" onSubmit={handleSubmit}>
                     <label className="text-gray-600 text-sm font-bold pb-1" htmlFor="username">Username:</label>
                     <input
@@ -93,7 +92,9 @@ const Login = () => {
                     />
                     <div className="mt-4">
                         <button className="flex w-full justify-center gap-2 items-center text-white py-2 px-4 bg-red-400 hover:bg-red-500 disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer rounded-full" title="Save" disabled={!canSave}>
-                                Sign In
+                                {isLoading ? 
+                                <svg class="mr-3 -ml-1 size-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                : <span>Sign in</span>}
                         </button>
                     </div>
                      <label htmlFor="persist" className="text-sm mt-4">
@@ -111,7 +112,7 @@ const Login = () => {
                     </div>
                     <div className="mt-4">
                         <button className="flex w-full text-gray-800 justify-center gap-2 items-center outline-gray-600 outline-2 -outline-offset-2 py-2 px-4 bg-white hover:bg-gray-600 hover:text-white disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer rounded-full" title="Create account">
-                                Create Account
+                                Create an account
                         </button>
                     </div>
                 </form>
