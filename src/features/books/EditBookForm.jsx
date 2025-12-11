@@ -3,9 +3,11 @@ import { useUpdateBookMutation, useDeleteBookMutation } from "./booksApiSlice";
 import { useNavigate } from "react-router";
 import { DocumentPlusIcon, DocumentMinusIcon } from "@heroicons/react/24/solid";
 import ConfirmDeleteModal from "../../components/modals/ConfirmDeleteModal";
+import useAuth from "../../hooks/useAuth";
 
 const EditBookForm = ({ book }) => {
 
+    const { isAdmin, isManager} = useAuth();
     const [updateBook, {
         isLoading,
         isSuccess,
@@ -61,9 +63,20 @@ const EditBookForm = ({ book }) => {
             console.error("Couldn't delete book", err);
         }
     }
-    const canSave = [title, author, isbn, publishedYear, copiesAvailable].every(value =>  !!value) && !isLoading;
+    const canSave = [title, author, isbn, publishedYear, copiesAvailable].every(Boolean) && !isLoading;
     
     const errContent = (error?.data?.message || delError?.data?.message) ?? '';
+
+    let deleteButton = null;
+    if (isManager && isAdmin) {
+        deleteButton = ( <button 
+                        className="flex gap-2 items-center text-rose-700 py-2 px-4 bg-rose-100 hover:bg-rose-200 disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer rounded-full" 
+                        title="Delete" 
+                        onClick={() => setOpen(true)}
+                        >
+                        Delete <DocumentMinusIcon className="size-5" />
+                    </button>)
+    }
     
     const content = (
         <>
@@ -154,14 +167,7 @@ const EditBookForm = ({ book }) => {
                         >
                         Save <DocumentPlusIcon className="size-5" />
                     </button>
-                    <button 
-                        className="flex gap-2 items-center text-rose-700 py-2 px-4 bg-rose-100 hover:bg-rose-200 disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer rounded-full" 
-                        title="Delete" 
-                        disabled={!canSave}
-                        onClick={() => setOpen(true)}
-                        >
-                        Delete <DocumentMinusIcon className="size-5" />
-                    </button>
+                    {deleteButton}
                     <ConfirmDeleteModal 
                         title={"Delete Book?"} 
                         message={"Are you sure? This can be undone."}

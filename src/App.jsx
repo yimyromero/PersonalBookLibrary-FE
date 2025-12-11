@@ -17,6 +17,7 @@ import NewBorrow from './features/borrow/NewBorrow';
 import EditBorrow from './features/borrow/EditBorrow';
 import RequireAuth from './features/auth/requireAuth';
 import PersistLogin from './features/auth/PersistLogin';
+import { ROLES } from './config/roles';
 //import './App.css'
 
 function App() {
@@ -24,17 +25,21 @@ function App() {
   return (
    <Routes>
     <Route path='/' element={<Layout />}>
+      {/* public routes */}
       <Route index element={<Public />} />
       <Route path='login' element={<Login />} />
+      {/* Protected Routes */}
       <Route element={<PersistLogin />}>
-        <Route element={<Prefetch />}>
-          <Route element={<RequireAuth />}>
+        <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
+          <Route element={<Prefetch />}>
             <Route path='dash' element={<DashLayout />}>
               <Route index element={<Welcome />} />
-              <Route path='users'>
-                <Route index element={<UsersList />} />
-                <Route path=':id' element={<EditUser />} />
-                <Route path='new' element={<NewUser />} />
+              <Route element={<RequireAuth allowedRoles={[ROLES.Manager, ROLES.Admin]}/>}>
+                <Route path='users'>
+                  <Route index element={<UsersList />} />
+                  <Route path=':id' element={<EditUser />} />
+                  <Route path='new' element={<NewUser />} />
+                </Route>
               </Route>
               <Route path='books'>
                 <Route index element={<BooksList />} />
@@ -49,7 +54,7 @@ function App() {
             </Route> { /* End Dash */}
           </Route>
         </Route>
-      </Route>
+      </Route> {/* End protected routes */}
     </Route>
    </Routes>
   );
