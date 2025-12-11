@@ -2,8 +2,11 @@ import { useGetBorrowsQuery } from "./BorrowApiSlice";
 import Borrow from "./Borrow";
 import { Link } from "react-router";
 import { PlusIcon } from "@heroicons/react/24/solid";
+import useAuth from "../../hooks/useAuth";
 
 const BorrowsList = () => {
+
+    const { username, isAdmin, isManager } = useAuth();
 
     const {
         data: borrows,
@@ -28,12 +31,18 @@ const BorrowsList = () => {
     }
 
     if (isSuccess) {
-        const { ids } = borrows;
-        console.log("ids", ids);
+        const { ids, entities } = borrows;
+        console.log("ids", ids, entities);
 
-        const tableContent = ids?.length
-            ? ids.map(borrowId => <Borrow key={borrowId} borrowId={borrowId} />)
-            : null;
+        let filteredByUsername = ids.filter(borrowId => entities[borrowId].user.username === username);
+
+        if (isAdmin || isManager) {
+            filteredByUsername = [...ids]; 
+        }
+
+        console.log("filter", filteredByUsername);
+
+        const tableContent = ids?.length && filteredByUsername.map(borrowId => <Borrow key={borrowId} borrowId={borrowId} />)
 
         content = (
             <>
