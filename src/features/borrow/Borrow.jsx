@@ -13,11 +13,11 @@ const Borrow = ({ borrowId }) => {
 
         return (
             <tr>
-                <td className="p-4 border-b border-gray-200 bg-white">{borrow.book.title}</td>
-                <td className="p-4 border-b border-gray-200 bg-white">{formatShortDate(borrow.borrowDate)}</td>
-                <td className="p-4 border-b border-gray-200 bg-white">{borrow.user.username}</td>
-                <td className="p-4 border-b border-gray-200 bg-white">{formatShortDate(borrow.dueDate)}</td>
-                <td className="p-4 border-b border-gray-200 bg-white">
+                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{borrow.book.title}</td>
+                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{formatShortDate(borrow.borrowDate)}</td>
+                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{borrow.user.username}</td>
+                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{formatShortDate(borrow.dueDate)}</td>
+                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">
                     <button onClick={handleEdit}>
                         <PencilIcon className="size-4" />
                     </button>

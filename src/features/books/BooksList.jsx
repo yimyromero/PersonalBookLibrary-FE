@@ -45,12 +45,12 @@ const BooksList = () => {
                 <table className="border-collapse table-auto w-full">
                     <thead>
                         <tr className="bg-slate-100">
-                            <th className="text-xs text-left text-neutral-600 p-4 border-b border-gray-200 font-normal">TITLE</th>
-                            <th className="text-xs text-left text-neutral-800 p-4 border-b border-gray-200 font-normal">AUTHOR</th>
-                            <th className="text-xs text-left text-neutral-800 p-4 border-b border-gray-200 font-normal">GENRE</th>
-                            <th className="text-xs text-left text-neutral-800 p-4 border-b border-gray-200 font-normal">YEAR</th>
-                            <th className="text-xs text-left text-neutral-800 p-4 border-b border-gray-200 font-normal">COPIES</th>
-                            <th className="text-xs text-left text-neutral-800 p-4 border-b border-gray-200 font-normal">EDIT</th>
+                            <th className="text-sm font-semibold text-left text-neutral-600 p-4 border-b border-gray-200">Title</th>
+                            <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Author</th>
+                            <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Genre</th>
+                            <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Year</th>
+                            <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Copies</th>
+                            <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
