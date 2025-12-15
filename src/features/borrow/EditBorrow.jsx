@@ -1,14 +1,31 @@
-import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { selectBorrowById } from "./BorrowApiSlice";
 import EditBorrowForm from "./EditBorrowForm";
+import { useGetBorrowsQuery } from "./BorrowApiSlice";
+import { useGetUsersQuery } from "../users/usersApiSlice";
+import { useGetBooksQuery } from "../books/booksApiSlice";
 
 const EditBorrow = () => {
     const { id } = useParams();
 
-    const borrow = useSelector(state => selectBorrowById(state, id));
+    const { borrow } = useGetBorrowsQuery("borrowList", {
+        selectFromResult: ({ data }) => ({
+            borrow: data?.entities[id]
+        })
+    })
+
+    const { users } = useGetUsersQuery("userList", {
+        selectFromResult: ({ data }) => ({
+            users: data?.ids.map(id => data?.entities[id])
+        })
+    })
+
+    const { books } = useGetBooksQuery("bookList", {
+        selectFromResult: ({ data }) => ({
+            books: data?.ids.map(id => data?.entities[id])
+        })
+    })
     
-    const content = borrow ? <EditBorrowForm borrow={borrow} /> : <p>Loading...</p>
+    const content = borrow ? <EditBorrowForm borrow={borrow} users={users} books={books} /> : <p>Loading...</p>
     return content;
 }
 

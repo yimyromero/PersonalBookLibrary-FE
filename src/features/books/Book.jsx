@@ -1,10 +1,14 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { selectBookById } from "./booksApiSlice";
+import { useGetBooksQuery } from "./booksApiSlice";
+import { memo } from "react";
 
 const Book = ({ bookId }) => {
-    const book = useSelector(state => selectBookById(state, bookId));
+    const { book } = useGetBooksQuery("bookList", {
+        selectFromResult: ({ data }) => ({
+            book: data?.entities[bookId]
+        })
+    })
 
     const navigate = useNavigate();
 
@@ -32,4 +36,6 @@ const Book = ({ bookId }) => {
     } else return null;
 }
 
-export default Book;
+const memoizedBook = memo(Book);
+
+export default memoizedBook;

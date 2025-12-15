@@ -1,16 +1,11 @@
 import { DocumentPlusIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { useGetUsersQuery } from "../users/usersApiSlice";
-import { selectAllUsers } from "../users/usersApiSlice";
-import { selectAllBooks, useGetBooksQuery } from "../books/booksApiSlice";
 import { useUpdateBorrowMutation, useDeleteBorrowMutation } from "./BorrowApiSlice";
-import { useAddNewBorrowMutation } from "./BorrowApiSlice";
 import { normalizeDateOnly, formatForInput, formatShortDate } from "../../utils/dateUtils";
 import { LOAN_STATUSES } from "../../config/loanStatuses";
 
-const EditBorrowForm = ({ borrow }) => {
+const EditBorrowForm = ({ borrow, users, books }) => {
     const [updateBorrow, {
             isLoading,
             isSuccess,
@@ -49,12 +44,10 @@ const EditBorrowForm = ({ borrow }) => {
             }
         }, [isSuccess, navigate]);
 
-    const usersList = useSelector(selectAllUsers);
     let userListOptions = null
 
     // Create options for the user select element
-    userListOptions = usersList.map(user => {
-        console.log("show", borrow.user._id, "user", user.id)
+    userListOptions = users.map(user => {
             return (
                 <option 
                     key={user.id}
@@ -63,11 +56,10 @@ const EditBorrowForm = ({ borrow }) => {
             )
         })
 
-    const booksList = useSelector(selectAllBooks);
     let bookListOptions = null;
 
     // Create options for the book select element
-    bookListOptions = booksList.map(book => {
+    bookListOptions = books.map(book => {
         return (
             <option
                 key={book.id}

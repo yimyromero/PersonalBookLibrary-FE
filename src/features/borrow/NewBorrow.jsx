@@ -1,10 +1,8 @@
 import { DocumentPlusIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
 import { useGetUsersQuery } from "../users/usersApiSlice";
-import { selectAllUsers } from "../users/usersApiSlice";
-import { selectAllBooks, useGetBooksQuery } from "../books/booksApiSlice";
+import { useGetBooksQuery } from "../books/booksApiSlice";
 import { useAddNewBorrowMutation } from "./BorrowApiSlice";
 
 const NewBorrow = () => {
@@ -62,10 +60,14 @@ const NewBorrow = () => {
             }
         }, [isAddSuccess, navigate]);
 
-    const usersList = useSelector(selectAllUsers);
+    const {usersList } = useGetUsersQuery("userList", {
+        selectFromResult: ({ data }) => ({
+            usersList: data?.ids.map(id => data?.entities[id])
+        })
+    })
+
     let userListOptions = null
 
-    // Create options for the user select element
     if (isSuccessUsers) {
         userListOptions = usersList.map(user => {
             return (
@@ -76,7 +78,11 @@ const NewBorrow = () => {
         })
     }
 
-    const booksList = useSelector(selectAllBooks);
+    const { booksList } = useGetBooksQuery("bookList", {
+        selectFromResult: ({ data }) => ({
+            booksList: data?.ids.map(id => data?.entities[id])
+        })
+    })
     let bookListOptions = null;
 
     // Create options for the book select element

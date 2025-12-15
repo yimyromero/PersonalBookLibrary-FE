@@ -1,11 +1,17 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { selectBorrowById } from "./BorrowApiSlice";
 import { formatShortDate } from "../../utils/dateUtils";
+import { useGetBorrowsQuery } from "./BorrowApiSlice";
+import { memo } from "react";
 
 const Borrow = ({ borrowId }) => {
-    const borrow = useSelector(state => selectBorrowById(state, borrowId));
+   
+    const { borrow } = useGetBorrowsQuery("borrowList", {
+        selectFromResult: ({ data }) => ({
+            borrow: data?.entities[borrowId]
+        }),
+    })
+
     const navigate = useNavigate();
 
     if (borrow) {
@@ -26,5 +32,6 @@ const Borrow = ({ borrowId }) => {
         )
     } else return null;
 }
+const memoizedBorrow = memo(Borrow);
 
-export default Borrow;
+export default memoizedBorrow;

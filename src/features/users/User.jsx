@@ -1,10 +1,14 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { selectUserById } from "./usersApiSlice";
+import { useGetUsersQuery } from "./usersApiSlice";
+import { memo } from "react";
 
 const User = ({ userId }) => {
-    const user = useSelector(state => selectUserById(state, userId));
+    const { user } = useGetUsersQuery("userList", {
+        selectFromResult: ({ data }) => ({
+            user: data?.entities[userId]
+        })
+    })
 
     const navigate = useNavigate();
 
@@ -27,4 +31,6 @@ const User = ({ userId }) => {
     } else return null;
 }
 
-export default User;
+const memoizedUser = memo(User);
+
+export default memoizedUser;

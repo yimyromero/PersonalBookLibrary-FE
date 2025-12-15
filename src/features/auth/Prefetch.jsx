@@ -6,18 +6,11 @@ import { useEffect } from "react";
 import { Outlet } from 'react-router';
 
 const Prefetch = () => {
+  
   useEffect(() => {
-    console.log("subscribing");
-    const books = store.dispatch(booksApiSlice.endpoints.getBooks.initiate());
-    const users = store.dispatch(usersApiSlice.endpoints.getUsers.initiate());
-    const borrows = store.dispatch(borrowsApiSlice.endpoints.getBorrows.initiate());
-
-    return () => {
-      console.log("unsubscribing");
-      books.unsubscribe();
-      users.unsubscribe();
-      borrows.unsubscribe();
-    };
+    store.dispatch(booksApiSlice.util.prefetch('getBooks', 'bookList', { force: true }));
+    store.dispatch(usersApiSlice.util.prefetch('getUsers', 'userList', { force: true }));
+    store.dispatch(borrowsApiSlice.util.prefetch('getBorrows', 'borrowList', { force: true }));
   }, []);
 
   return <Outlet />
