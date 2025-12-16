@@ -18,11 +18,11 @@ const Public = () => {
 						Keep track of your favorite books, and find recommendations
 					</p>
 					<div className="pt-16">
-						<a
-							href="/login"
+						<Link
+							to="/login"
 							className="flex w-full justify-center gap-2 items-center text-white py-2 px-4 bg-red-400 hover:bg-red-500 disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer rounded-full">
 							Sign In
-						</a>
+						</Link>
             <p className="mt-4 text-center text-gray-600">Or </p>
 						<div className="text-center mt-4">
 							<Link
