@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useAddNewBookMutation } from "./booksApiSlice";
 import { useNavigate } from "react-router";
 import { DocumentPlusIcon } from "@heroicons/react/24/solid";
+import useTitle from "../../hooks/useTitle";
 
 const NewBook = () => {
+    useTitle("New Book");
 
      const [addBook, { 
             isLoading,

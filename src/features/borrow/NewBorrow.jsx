@@ -4,8 +4,11 @@ import { useNavigate } from "react-router";
 import { useGetUsersQuery } from "../users/usersApiSlice";
 import { useGetBooksQuery } from "../books/booksApiSlice";
 import { useAddNewBorrowMutation } from "./BorrowApiSlice";
+import useTitle from "../../hooks/useTitle";
 
 const NewBorrow = () => {
+    useTitle("New book loan");
+    
     const [addNewBorrow, { 
             isLoading: isAddLoading,
             isSuccess: isAddSuccess,

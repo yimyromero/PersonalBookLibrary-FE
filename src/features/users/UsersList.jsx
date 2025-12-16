@@ -2,8 +2,10 @@ import { useGetUsersQuery } from "./usersApiSlice";
 import User from "./User";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router";
+import useTitle from "../../hooks/useTitle";
 
 const UsersList = () => {
+    useTitle("Users List")
 
     const {
         data: users,

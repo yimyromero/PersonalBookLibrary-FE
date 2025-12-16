@@ -18,9 +18,11 @@ import EditBorrow from './features/borrow/EditBorrow';
 import RequireAuth from './features/auth/requireAuth';
 import PersistLogin from './features/auth/PersistLogin';
 import { ROLES } from './config/roles';
+import useTitle from './hooks/useTitle';
 //import './App.css'
 
 function App() {
+  useTitle("Personal Library")
 
   return (
    <Routes>

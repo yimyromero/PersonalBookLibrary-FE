@@ -2,9 +2,11 @@ import { useGetBooksQuery } from "./booksApiSlice";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router";
 import Book from "./Book";
+import useTitle from "../../hooks/useTitle";
 
 const BooksList = () => {
-
+    useTitle("Books List");
+    
     const {
         data: books,
         isLoading,

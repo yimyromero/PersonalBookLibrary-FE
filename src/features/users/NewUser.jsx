@@ -3,8 +3,10 @@ import { useAddNewUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router";
 import { ROLES } from "../../config/roles";
 import { DocumentPlusIcon } from "@heroicons/react/24/solid";
+import useTitle from "../../hooks/useTitle";
 
 const NewUser = () => {
+    useTitle("New User")
 
     const USER_REG = /^[a-zA-Z]{3,20}$/;
     const PWD_REGEX = /^[a-zA-Z0-9!@#$%]{4,12}$/;
@@ -81,7 +83,7 @@ const NewUser = () => {
 
     const content = (
         <>
-            <p>{error?.data?.message}</p>
+            <div className="absolute bg-yellow-100"><p className="text-red-500 ">{error?.data?.message}</p></div>
             <form className="flex flex-col p-10 bg-white" onSubmit={onSaveUserClicked}>
                 <div className="flex mb-7">
                     <h2 className="text-xl font-bold text-slate-800">New User</h2>

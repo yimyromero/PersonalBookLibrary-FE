@@ -1,8 +1,10 @@
 import { useNavigate, useParams } from "react-router";
 import EditUserForm from "./EditUserForm";
 import { useGetUsersQuery } from "./usersApiSlice";
+import useTitle from "../../hooks/useTitle";
 
 const EditUser = () => {
+    useTitle("Edit User");
     const { id } = useParams();
 
     const { user } = useGetUsersQuery("userList", {

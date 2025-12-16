@@ -3,8 +3,10 @@ import Borrow from "./Borrow";
 import { Link } from "react-router";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import useAuth from "../../hooks/useAuth";
+import useTitle from "../../hooks/useTitle";
 
 const BorrowsList = () => {
+    useTitle("Loans List");
 
     const { username, isAdmin, isManager } = useAuth();
 
