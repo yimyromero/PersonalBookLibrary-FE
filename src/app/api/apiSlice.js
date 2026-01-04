@@ -1,8 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials, logOut } from "../../features/auth/authSlice";
 
+const baseEnvUrl = import.meta.env.VITE_API_BASE_URL;
+
 const baseQuery = fetchBaseQuery({
-	baseUrl: "https://romerolibrary.onrender.com",
+	baseUrl: baseEnvUrl,
 	credentials: "include",
 	prepareHeaders: (headers, { getState }) => {
 		const token = getState().auth.token;
