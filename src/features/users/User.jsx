@@ -19,9 +19,9 @@ const User = ({ userId }) => {
 
         return (
             <tr>
-                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{user.username}</td>
-                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{userRolesString}</td>
-                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">
+                <td className="px-4 py-3 border-b border-gray-200 bg-white text-gray-600 text-sm lg:text-base">{user.username}</td>
+                <td className="px-4 py-3 border-b border-gray-200 bg-white text-gray-600 text-sm lg:text-base">{userRolesString}</td>
+                <td className="px-4 py-3 border-b border-gray-200 bg-white text-gray-600 text-sm lg:text-base">
                     <button onClick={handleEdit}>
                         <PencilIcon className="size-4" />
                     </button>

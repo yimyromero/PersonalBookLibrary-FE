@@ -19,11 +19,11 @@ const Borrow = ({ borrowId }) => {
 
         return (
             <tr>
-                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{borrow.book.title}</td>
-                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{formatShortDate(borrow.borrowDate)}</td>
-                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{borrow.user.username}</td>
-                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">{formatShortDate(borrow.dueDate)}</td>
-                <td className="p-4 border-b border-gray-200 bg-white text-gray-800">
+                <td className="px-4 py-3 border-b border-gray-200 bg-white text-gray-600 text-sm lg:text-base">{borrow.book.title}</td>
+                <td className="px-4 py-3 border-b border-gray-200 bg-white text-gray-600 text-sm lg:text-base">{formatShortDate(borrow.borrowDate)}</td>
+                <td className="px-4 py-3 border-b border-gray-200 bg-white text-gray-600 text-sm lg:text-base">{borrow.user.username}</td>
+                <td className="px-4 py-3 border-b border-gray-200 bg-white text-gray-600 text-sm lg:text-base">{formatShortDate(borrow.dueDate)}</td>
+                <td className="px-4 py-3 border-b border-gray-200 bg-white text-gray-600 text-sm lg:text-base">
                     <button onClick={handleEdit}>
                         <PencilIcon className="size-4" />
                     </button>
