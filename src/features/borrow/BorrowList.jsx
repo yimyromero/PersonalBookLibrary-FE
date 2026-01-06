@@ -54,7 +54,7 @@ const BorrowsList = () => {
                 <table className="border-collapse table-auto w-full">
                     <thead>
                         <tr className="bg-slate-100">
-                            <th className="text-sm font-semibold text-left text-neutral-600 p-4 border-b border-gray-200">Title</th>
+                            <th className="text-sm font-semibold text-left text-neutral-600 p-4 border-b border-gray-200">Book title</th>
                             <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Borrowed date</th>
                             <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Borrower</th>
                             <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Due date</th>

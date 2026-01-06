@@ -177,7 +177,7 @@ const EditUserForm = ({ user }) => {
                     </button>
                     <ConfirmDeleteModal 
                         title={"Delete User?"} 
-                        message={"Are you sure? This can be undone."}
+                        message={"Are you sure? This can't be undone."}
                         isOpen={isOpen}
                         onConfirm={onDeleteUserClicked}
                         onCancel={() => setOpen(false)}

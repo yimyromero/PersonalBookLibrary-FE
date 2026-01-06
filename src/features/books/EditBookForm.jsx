@@ -170,7 +170,7 @@ const EditBookForm = ({ book }) => {
                     {deleteButton}
                     <ConfirmDeleteModal 
                         title={"Delete Book?"} 
-                        message={"Are you sure? This can be undone."}
+                        message={"Are you sure? This can't be undone."}
                         isOpen={isOpen}
                         onConfirm={onDeleteBookClicked}
                         onCancel={() => setOpen(false)}

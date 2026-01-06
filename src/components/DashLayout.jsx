@@ -5,10 +5,13 @@ import DashAside from './DashAside';
 
 const DashLayout = () => {
     return (
-        <div className='min-h-screen grid grid-cols-12 grid-rows-[70px_1fr] bg-slate-200'>
+        <div className='min-h-screen grid
+         grid-cols-[56px_1fr]
+         lg:grid-cols-[240px_1fr]
+         grid-rows-[70px_1fr] bg-slate-200'>
             <DashAside />
             <DashHeader/>
-            <div className='col-start-3 row-start-2 col-span-10 m-5 rounded'>
+            <div className='m-5 rounded'>
                 <Outlet />
             </div>
             {/* <DashFooter /> */}

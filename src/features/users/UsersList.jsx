@@ -45,7 +45,7 @@ const UsersList = () => {
             <table className="border-collapse table-auto w-full bg-white">
                 <thead>
                     <tr className="bg-slate-100">
-                        <th className="text-sm font-semibold text-left text-neutral-600 p-4 border-b border-gray-200">Username</th>
+                        <th className="text-sm font-semibold text-left text-neutral-600 p-4 border-b border-gray-200">Name</th>
                         <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Roles</th>
                         <th className="text-sm font-semibold text-left text-neutral-800 p-4 border-b border-gray-200">Edit</th>
                     </tr>
