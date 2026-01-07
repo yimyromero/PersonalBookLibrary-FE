@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { ROLES } from "../../config/roles";
 import { DocumentPlusIcon } from "@heroicons/react/24/solid";
 import useTitle from "../../hooks/useTitle";
+import { isValidPassword } from "../../utils/checkPassword";
 
 const NewUser = () => {
     useTitle("New User")
@@ -34,7 +35,7 @@ const NewUser = () => {
     }, [username]);
 
     useEffect(() => {
-        setValidPassword(PWD_REGEX.test(password));
+        setValidPassword(isValidPassword(password));
         console.log(validPassword, "valid");
     }, [password]);
 
