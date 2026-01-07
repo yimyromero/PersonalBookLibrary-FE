@@ -9,7 +9,7 @@ const NewUser = () => {
     useTitle("New User")
 
     const USER_REG = /^[a-zA-Z]{3,20}$/;
-    const PWD_REGEX = /^[a-zA-Z0-9!@#$%]{4,12}$/;
+    const PWD_REGEX = /^(?=.*[a-zA-Z])(?=.*[!@#$%])(?=.*[0-9]).{8,}$/;
 
     const [addUser, { 
         isLoading,
@@ -35,6 +35,7 @@ const NewUser = () => {
 
     useEffect(() => {
         setValidPassword(PWD_REGEX.test(password));
+        console.log(validPassword, "valid");
     }, [password]);
 
     useEffect(() => {
@@ -57,7 +58,7 @@ const NewUser = () => {
         setRoles(values);
     }
 
-    const canSave = [roles.length, validUsername, validPassword].every(value => !!value) && !isLoading;
+    const canSave = [roles.length, validUsername, validPassword].every(Boolean) && !isLoading;
     console.log(canSave, roles.length);
 
     const onSaveUserClicked = async (e) => {
@@ -101,8 +102,14 @@ const NewUser = () => {
                     onChange={onUserNameChanged}
                 />
 
-                <label className="text-gray-600 text-sm font-bold pb-1 after:content-['*'] after:text-red-500" htmlFor="password">
-                    Password: <span className="font-normal text-xs text-gray-500">(4-12 chars incl. !@#$%)</span>
+                <label className="text-gray-600 text-sm font-bold pb-1" htmlFor="password">
+                    Password:<span className="text-red-500">*</span>
+                    <span className="font-normal text-xs text-gray-500">
+                        <span className="block">At least 8 characters in length</span>
+                        <span className="block">Must contain at least 1 number</span>
+                        <span className="block">Must contain at least 1 letter</span>
+                        <span className="block">Must contain at least 1 special character !@#$% </span>
+                    </span>
                 </label>
                 <input 
                     className="rounded border border-gray-300 bg-gray-100 mb-4 px-2 py-1 focus:outline-none"
